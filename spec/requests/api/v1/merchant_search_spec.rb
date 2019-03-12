@@ -71,20 +71,4 @@ describe "Merchants API" do
     expect(merchant.count).to eq(2)
     expect(merchant.first["updated_at"]).to eq(assertion)
   end
-
-  it 'can select a random merchant' do
-    merchant_1 = create(:merchant)
-    merchant_2 = create(:merchant)
-    merchant_3 = create(:merchant)
-    merchant_4 = create(:merchant)
-    merchant_5 = create(:merchant)
-    array = [merchant_1, merchant_2, merchant_3, merchant_4, merchant_5]
-
-    get "/api/v1/merchants/random.json"
-
-    merchant = JSON.parse(response.body)
-
-    expect(response).to be_successful
-    expect()
-  end
 end
