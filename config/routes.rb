@@ -7,7 +7,8 @@ Rails.application.routes.draw do
         get '/random', to: 'merchants_random#show'
       end
       resources :merchants, only: [:index, :show] do
-        resources 'items', to: 'merchants/merchants_item#index'
+        resources 'items', to: 'merchants/merchant_items#index'
+        resources 'invoices', to: 'merchants/merchant_invoices#index'
       end
       resources :customers, only: :index
     end
