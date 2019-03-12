@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Merchants API" do
-  it 'can select a random merchant' do
+  it 'can return a random merchant' do
     create_list(:merchant, 10)
 
     ids = Merchant.all.map(&:id)
