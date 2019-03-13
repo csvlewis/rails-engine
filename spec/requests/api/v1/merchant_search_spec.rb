@@ -71,4 +71,20 @@ describe "Merchants API" do
     expect(merchant.count).to eq(2)
     expect(merchant.first["updated_at"]).to eq(assertion)
   end
+
+  describe "Merchants API" do
+    it 'can return a random merchant' do
+      create_list(:merchant, 10)
+
+      ids = Merchant.all.map(&:id)
+
+      get "/api/v1/merchants/random.json"
+
+      merchant = JSON.parse(response.body)
+
+      expect(response).to be_successful
+
+      expect(ids).to include(merchant["id"])
+    end
+  end
 end
