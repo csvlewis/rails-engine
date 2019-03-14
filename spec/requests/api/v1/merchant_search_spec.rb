@@ -13,25 +13,25 @@ describe "Merchants API" do
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant["id"]).to eq(id)
+    expect(merchant["data"]["id"]).to eq(id.to_s)
 
     get "/api/v1/merchants/find?name=#{name}"
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant["name"]).to eq(name)
+    expect(merchant["data"]["attributes"]["name"]).to eq(name)
 
     get "/api/v1/merchants/find?created_at=#{date}"
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant["created_at"]).to eq(assertion)
+    expect(merchant["data"]["attributes"]["created_at"]).to eq(assertion)
 
     get "/api/v1/merchants/find?updated_at=#{date}"
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant["updated_at"]).to eq(assertion)
+    expect(merchant["data"]["attributes"]["updated_at"]).to eq(assertion)
   end
 
   it "can search for all merchants matching a query parameter" do
@@ -47,29 +47,29 @@ describe "Merchants API" do
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant.count).to eq(1)
-    expect(merchant.first["id"]).to eq(id)
+    expect(merchant["data"].count).to eq(1)
+    expect(merchant["data"].first["id"]).to eq(id.to_s)
 
     get "/api/v1/merchants/find_all?name=#{name}"
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant.count).to eq(2)
-    expect(merchant.first["name"]).to eq(name)
+    expect(merchant["data"].count).to eq(2)
+    expect(merchant["data"].first["attributes"]["name"]).to eq(name)
 
     get "/api/v1/merchants/find_all?created_at=#{date}"
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant.count).to eq(2)
-    expect(merchant.first["created_at"]).to eq(assertion)
+    expect(merchant["data"].count).to eq(2)
+    expect(merchant["data"].first["attributes"]["created_at"]).to eq(assertion)
 
     get "/api/v1/merchants/find_all?updated_at=#{date}"
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant.count).to eq(2)
-    expect(merchant.first["updated_at"]).to eq(assertion)
+    expect(merchant["data"].count).to eq(2)
+    expect(merchant["data"].first["attributes"]["updated_at"]).to eq(assertion)
   end
 
   describe "Merchants API" do
