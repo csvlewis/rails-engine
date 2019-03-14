@@ -15,37 +15,37 @@ describe "Invoices API" do
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice["id"]).to eq(id)
+    expect(invoice["data"]["id"]).to eq(id.to_s)
 
     get "/api/v1/invoices/find?status=#{status}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice["status"]).to eq(status)
+    expect(invoice["data"]["attributes"]["status"]).to eq(status)
 
     get "/api/v1/invoices/find?customer_id=#{customer_id}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice["customer_id"]).to eq(customer_id)
+    expect(invoice["data"]["attributes"]["customer_id"]).to eq(customer_id)
 
     get "/api/v1/invoices/find?merchant_id=#{merchant_id}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice["merchant_id"]).to eq(merchant_id)
+    expect(invoice["data"]["attributes"]["merchant_id"]).to eq(merchant_id)
 
     get "/api/v1/invoices/find?created_at=#{date}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice["created_at"]).to eq(assertion)
+    expect(invoice["data"]["attributes"]["created_at"]).to eq(assertion)
 
     get "/api/v1/invoices/find?updated_at=#{date}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice["updated_at"]).to eq(assertion)
+    expect(invoice["data"]["attributes"]["updated_at"]).to eq(assertion)
   end
 
   it 'can search for all invoices matching a query parameter' do
@@ -66,42 +66,41 @@ describe "Invoices API" do
 
     expect(response).to be_successful
     expect(invoice.count).to eq(1)
-
-    expect(invoice.first["id"]).to eq(id)
+    expect(invoice["data"].first["id"]).to eq(id.to_s)
 
     get "/api/v1/invoices/find_all?status=#{status}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice.count).to eq(2)
-    expect(invoice.first["status"]).to eq(status)
+    expect(invoice["data"].count).to eq(2)
+    expect(invoice["data"].first["attributes"]["status"]).to eq(status)
 
     get "/api/v1/invoices/find_all?customer_id=#{customer_id}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice.count).to eq(2)
-    expect(invoice.first["customer_id"]).to eq(customer_id)
+    expect(invoice["data"].count).to eq(2)
+    expect(invoice["data"].first["attributes"]["customer_id"]).to eq(customer_id)
 
     get "/api/v1/invoices/find_all?merchant_id=#{merchant_id}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice.count).to eq(2)
-    expect(invoice.first["merchant_id"]).to eq(merchant_id)
+    expect(invoice["data"].count).to eq(2)
+    expect(invoice["data"].first["attributes"]["merchant_id"]).to eq(merchant_id)
 
     get "/api/v1/invoices/find_all?created_at=#{date}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice.count).to eq(2)
-    expect(invoice.first["created_at"]).to eq(assertion)
+    expect(invoice["data"].count).to eq(2)
+    expect(invoice["data"].first["attributes"]["created_at"]).to eq(assertion)
 
     get "/api/v1/invoices/find_all?updated_at=#{date}"
     invoice = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice.count).to eq(2)
-    expect(invoice.first["updated_at"]).to eq(assertion)
+    expect(invoice["data"].count).to eq(2)
+    expect(invoice["data"].first["attributes"]["updated_at"]).to eq(assertion)
   end
 end
