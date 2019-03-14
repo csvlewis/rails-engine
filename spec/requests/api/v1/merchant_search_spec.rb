@@ -34,7 +34,7 @@ describe "Merchants API" do
     expect(merchant["updated_at"]).to eq(assertion)
   end
 
-  it "can search for all merchants that match a query parameter" do
+  it "can search for all merchants matching a query parameter" do
     date = '2019-03-12 19:31:18 UTC'
     assertion = '2019-03-12T19:31:18.000Z'
     merchant = create(:merchant, name: 'Searched Merchant', created_at: date, updated_at: date)
