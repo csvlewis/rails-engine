@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Merchants API" do
-  it "can return all merchants" do
+  it "can return an index of all merchants" do
     create_list(:merchant, 3)
 
     get "/api/v1/merchants.json"
@@ -21,8 +21,8 @@ describe "Merchants API" do
 
     expect(response).to be_successful
 
-    merchant = JSON.parse(response.body).symbolize_keys
+    merchant = JSON.parse(response.body)
 
-    expect(merchant[:id]).to eq(id)
+    expect(merchant["id"]).to eq(id)
   end
 end
