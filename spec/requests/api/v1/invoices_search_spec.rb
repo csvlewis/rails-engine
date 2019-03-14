@@ -103,4 +103,17 @@ describe "Invoices API" do
     expect(invoice["data"].count).to eq(2)
     expect(invoice["data"].first["attributes"]["updated_at"]).to eq(assertion)
   end
+
+  it "can search for a random invoice" do
+    create_list(:invoice, 10)
+
+    ids = Invoice.all.map(&:id)
+
+    get "/api/v1/invoices/random.json"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(ids).to include(invoice["data"]["id"].to_i)
+  end
 end
