@@ -23,7 +23,7 @@ RSpec.describe Merchant, type: :model do
       end
 
       it 'returns the total revenue for a merchant across successful transactions' do
-        expect(@merchant.total_revenue).to eq(500000)
+        expect(@merchant.total_revenue[0].revenue).to eq(500000)
       end
     end
   end

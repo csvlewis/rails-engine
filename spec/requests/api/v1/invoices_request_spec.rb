@@ -10,7 +10,7 @@ describe "Invoices API" do
 
     invoices = JSON.parse(response.body)
 
-    expect(invoices.count).to eq(3)
+    expect(invoices["data"].count).to eq(3)
   end
 
   it "can return an invoice by id" do
@@ -23,6 +23,6 @@ describe "Invoices API" do
 
     invoice = JSON.parse(response.body)
 
-    expect(invoice["id"]).to eq(id)
+    expect(invoice["data"]["attributes"]["id"]).to eq(id)
   end
 end

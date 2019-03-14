@@ -11,7 +11,7 @@ describe "Merchants API" do
     items = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(items.count).to eq(5)
+    expect(items["data"].count).to eq(5)
   end
 
   it 'can return all invoices associated with a merchant' do
@@ -24,6 +24,6 @@ describe "Merchants API" do
     items = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(items.count).to eq(5)
+    expect(items["data"].count).to eq(5)
   end
 end

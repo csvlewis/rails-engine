@@ -83,8 +83,7 @@ describe "Merchants API" do
       merchant = JSON.parse(response.body)
 
       expect(response).to be_successful
-
-      expect(ids).to include(merchant["id"])
+      expect(ids).to include(merchant["data"]["id"].to_i)
     end
   end
 end

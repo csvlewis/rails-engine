@@ -66,6 +66,7 @@ describe "Invoices API" do
 
     expect(response).to be_successful
     expect(invoice.count).to eq(1)
+
     expect(invoice.first["id"]).to eq(id)
 
     get "/api/v1/invoices/find_all?status=#{status}"
