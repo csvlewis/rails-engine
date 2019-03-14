@@ -23,6 +23,16 @@ Rails.application.routes.draw do
         resources :customer, to: 'invoices/invoice_customer#show'
         resources :merchant, to: 'invoices/invoice_merchant#show'
       end
+      namespace :invoices do
+        get '/find', to: 'invoices_search#show'
+        get '/find_all', to: 'invoices_search#index'
+        get '/random', to: 'invoices_random#show'
+      end
+      namespace :customers do
+        get '/find', to: 'customers_search#show'
+        get '/find_all', to: 'customers_search#index'
+        get '/random', to: 'customers_random#show'
+      end
       resources :customers, only: [:index, :show]
     end
   end
