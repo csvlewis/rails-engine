@@ -6,7 +6,7 @@ class Merchant < ApplicationRecord
 
   def total_revenue
     invoices.joins(:transactions, :invoice_items)
-            .where(transactions: { result: 'success' })
+            .merge(Transaction.successful)
             .sum('invoice_items.unit_price * invoice_items.quantity')
   end
 end

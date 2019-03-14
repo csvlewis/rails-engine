@@ -21,7 +21,7 @@ RSpec.describe Merchant, type: :model do
         create_list(:invoice_item, 5, invoice: @invoice)
         create_list(:invoice_item, 5, invoice: @invoice_2)
       end
-      
+
       it 'returns the total revenue for a merchant across successful transactions' do
         expect(@merchant.total_revenue).to eq(500000)
       end
