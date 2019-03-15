@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         resources :invoices, to: 'merchants/merchant_invoices#index'
         get '/revenue', to: 'merchants/merchant_date_revenue#show', constraints: ->(request) {request.query_parameters[:date].present?}
         get '/revenue', to: 'merchants/merchant_revenue#show'
+        get '/favorite_customer', to: 'merchants/merchant_favorite_customer#show'
       end
 
       namespace :invoices do
