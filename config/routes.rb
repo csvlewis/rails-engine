@@ -55,6 +55,11 @@ Rails.application.routes.draw do
         resources :merchant, to: 'items/item_merchant#show'
       end
 
+      namespace :transactions do
+        get '/find', to: 'transactions_search#show'
+        get '/find_all', to: 'transactions_search#index'
+        get '/random', to: 'transactions_random#show'
+      end
       resources :transactions, only: [:index, :show]
     end
   end
