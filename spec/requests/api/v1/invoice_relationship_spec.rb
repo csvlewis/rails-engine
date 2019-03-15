@@ -23,19 +23,19 @@ describe "Invoices API" do
   it 'can return all transactions associated with an invoice' do
     get "/api/v1/invoices/#{@id}/transactions"
 
-    items = JSON.parse(response.body)
+    transactions = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(items["data"].count).to eq(5)
+    expect(transactions["data"].count).to eq(5)
   end
 
   it 'can return all invoice_items associated with an invoice' do
     get "/api/v1/invoices/#{@id}/invoice_items"
 
-    items = JSON.parse(response.body)
+    invoice_items = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(items["data"].count).to eq(5)
+    expect(invoice_items["data"].count).to eq(5)
   end
 
   it 'can return all items associated with an invoice' do
@@ -50,18 +50,18 @@ describe "Invoices API" do
   it 'can return the customer associated with an invoice' do
     get "/api/v1/invoices/#{@id}/customer"
 
-    items = JSON.parse(response.body)
+    customer = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(items["data"]["id"]).to eq(@customer.id.to_s)
+    expect(customer["data"]["id"]).to eq(@customer.id.to_s)
   end
 
-  it 'can return the merchants associated with an invoice' do
+  it 'can return the merchant associated with an invoice' do
     get "/api/v1/invoices/#{@id}/merchant"
 
-    items = JSON.parse(response.body)
+    merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(items["data"]["id"]).to eq(@merchant.id.to_s)
+    expect(merchant["data"]["id"]).to eq(@merchant.id.to_s)
   end
 end
