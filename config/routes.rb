@@ -54,6 +54,8 @@ Rails.application.routes.draw do
         resources :invoice_items, to: 'items/item_invoice_items#index'
         resources :merchant, to: 'items/item_merchant#show'
       end
+
+      resources :transactions, only: [:index, :show]
     end
   end
 end
