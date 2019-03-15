@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 describe "Invoices API" do
-  it "can return an index of all invoices" do
+  before :each do
     create_list(:invoice, 3)
+  end
+  it "can return an index of all invoices" do
 
     get "/api/v1/invoices.json"
 
@@ -15,7 +17,6 @@ describe "Invoices API" do
 
   it "can return an invoice by id" do
     id = create(:invoice).id
-    create_list(:invoice, 3)
 
     get "/api/v1/invoices/#{id}.json"
 
