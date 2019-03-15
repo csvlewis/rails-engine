@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Merchants API" do
+describe "Invoice_items API" do
   before :each do
     create_list(:item, 5)
     create_list(:invoice, 5)
