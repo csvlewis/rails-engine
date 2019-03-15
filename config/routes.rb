@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show] do
         resources :items, to: 'merchants/merchant_items#index'
         resources :invoices, to: 'merchants/merchant_invoices#index'
+        get '/revenue', to: 'merchants/merchant_date_revenue#show', constraints: ->(request) {request.query_parameters[:date].present?}
         get '/revenue', to: 'merchants/merchant_revenue#show'
       end
 

@@ -9,4 +9,11 @@ class Merchant < ApplicationRecord
             .joins(:transactions, :invoice_items)
             .merge(Transaction.successful)
   end
+
+  def total_date_revenue(date)
+    invoices.select('sum(invoice_items.unit_price * invoice_items.quantity) as revenue')
+            .joins(:transactions, :invoice_items)
+            .merge(Transaction.successful)
+            .where("DATE(invoices.created_at) = ?", date)
+  end
 end
