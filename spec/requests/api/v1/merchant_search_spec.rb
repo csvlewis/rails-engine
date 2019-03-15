@@ -10,8 +10,6 @@ describe "Merchants API" do
     create_list(:merchant, 5)
   end
   it "can search for a merchant with a query parameter" do
-
-
     get "/api/v1/merchants/find?id=#{@id}"
     merchant = JSON.parse(response.body)
 
@@ -38,8 +36,9 @@ describe "Merchants API" do
   end
 
   it "can search for all merchants matching a query parameter" do
-    get "/api/v1/merchants/find_all?id=#{@id}"
     create(:merchant, name: 'Searched Merchant', created_at: @date, updated_at: @date)
+
+    get "/api/v1/merchants/find_all?id=#{@id}"
 
     merchant = JSON.parse(response.body)
 

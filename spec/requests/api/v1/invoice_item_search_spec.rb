@@ -57,4 +57,58 @@ describe "Invoice_items API" do
     expect(response).to be_successful
     expect(invoice_item["data"]["attributes"]["updated_at"]).to eq(@assertion)
   end
+
+  it "can search for all invoice_items matching a query parameter" do
+    create(:invoice_item, quantity: 1, unit_price: 100, item_id: @item_id, invoice_id: @invoice_id, created_at: @date, updated_at: @date)
+
+    get "/api/v1/invoice_items/find_all?id=#{@id}"
+
+    invoice_item = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoice_item["data"].count).to eq(1)
+    expect(invoice_item["data"].first["id"]).to eq(@id.to_s)
+
+    get "/api/v1/invoice_items/find_all?quantity=#{@quantity}"
+    invoice_item = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoice_item["data"].count).to eq(2)
+    expect(invoice_item["data"].first["attributes"]["quantity"]).to eq(@quantity)
+
+    get "/api/v1/invoice_items/find_all?unit_price=#{@unit_price}"
+    invoice_item = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoice_item["data"].count).to eq(2)
+    expect(invoice_item["data"].first["attributes"]["unit_price"]).to eq(@unit_price)
+
+    get "/api/v1/invoice_items/find_all?item_id=#{@item_id}"
+    invoice_item = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoice_item["data"].count).to eq(2)
+    expect(invoice_item["data"].first["attributes"]["item_id"]).to eq(@item_id)
+
+    get "/api/v1/invoice_items/find_all?invoice_id=#{@invoice_id}"
+    invoice_item = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoice_item["data"].count).to eq(2)
+    expect(invoice_item["data"].first["attributes"]["invoice_id"]).to eq(@invoice_id)
+
+    get "/api/v1/invoice_items/find_all?created_at=#{@date}"
+    invoice_item = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoice_item["data"].count).to eq(2)
+    expect(invoice_item["data"].first["attributes"]["created_at"]).to eq(@assertion)
+
+    get "/api/v1/invoice_items/find_all?updated_at=#{@date}"
+    invoice_item = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoice_item["data"].count).to eq(2)
+    expect(invoice_item["data"].first["attributes"]["updated_at"]).to eq(@assertion)
+  end
 end
