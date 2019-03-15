@@ -109,4 +109,17 @@ describe "Items API" do
     expect(items["data"].count).to eq(2)
     expect(items["data"].first["attributes"]["updated_at"]).to eq(@assertion)
   end
+
+  it "can search for a random item" do
+    create_list(:item, 10)
+
+    ids = Item.all.map(&:id)
+
+    get "/api/v1/items/random.json"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(ids).to include(item["data"]["id"].to_i)
+  end
 end
