@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe 'Items API' do
   before :each do
-    date_1 = '2019-03-12 19:31:18 UTC'
-    date_2 = '2019-03-14 19:31:18 UTC'
-    @assertion = '2019-01-14'
+    date_1 = '2019-03-14 19:31:18 UTC'
+    date_2 = '2019-03-12 19:31:18 UTC'
+    @assertion = '2019-03-14'
     @item_1 = create(:item, name: 'Item 1')
     @item_2 = create(:item, name: 'Item 2')
     @item_3 = create(:item, name: 'Item 3')
@@ -14,7 +14,7 @@ describe 'Items API' do
     invoice_4 = create(:invoice)
     invoice_5 = create(:invoice)
     create(:transaction, invoice: invoice_1)
-    create(:transaction, invoice: invoice_2, result: 'failed')
+    create(:transaction, invoice: invoice_2)
     create(:transaction, invoice: invoice_3)
     create(:transaction, invoice: invoice_4)
     create(:transaction, invoice: invoice_5)
@@ -44,5 +44,14 @@ describe 'Items API' do
     expect(items["data"][0]["id"]).to eq(@item_3.id.to_s)
     expect(items["data"][1]["id"]).to eq(@item_2.id.to_s)
     expect(items["data"][2]["id"]).to eq(@item_1.id.to_s)
+  end
+
+  it 'can return the date with the most sales for the given item' do
+    get "/api/v1/items/#{@item_1.id}/best_day"
+
+    date = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(date["data"][0]["attributes"]["date"]).to eq(@assertion)
   end
 end

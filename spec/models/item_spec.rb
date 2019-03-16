@@ -12,11 +12,32 @@ RSpec.describe Item, type: :model do
       it { should have_many :invoice_items }
     end
 
+    describe 'instance methods' do
+      before :each do
+        @date_1 = '2019-03-14 19:31:18 UTC'
+        date_2 = '2019-03-12 19:31:18 UTC'
+        @item_1 = create(:item, name: 'Item 1')
+        invoice_1 = create(:invoice, created_at: @date_1, updated_at: @date_1)
+        invoice_2 = create(:invoice, created_at: @date_1, updated_at: @date_1)
+        invoice_3 = create(:invoice, created_at: date_2, updated_at: date_2)
+        create(:transaction, invoice: invoice_1)
+        create(:transaction, invoice: invoice_2)
+        create(:transaction, invoice: invoice_3)
+        create(:invoice_item, unit_price: 100, quantity: 1, invoice: invoice_1, item: @item_1)
+        create(:invoice_item, unit_price: 100, quantity: 1, invoice: invoice_2, item: @item_1)
+        create(:invoice_item, unit_price: 100, quantity: 1, invoice: invoice_3, item: @item_1)
+      end
+      describe '.best_day' do
+        it 'returns the date with the most sales for the given item' do
+          expect(@item_1.best_day[0].best_day).to eq(Date.parse(@date_1))
+        end
+      end
+    end
+
     describe 'class methods' do
       before :each do
         date_1 = '2019-03-12 19:31:18 UTC'
         date_2 = '2019-03-14 19:31:18 UTC'
-        @assertion = '2019-01-14'
         @item_1 = create(:item, name: 'Item 1')
         @item_2 = create(:item, name: 'Item 2')
         @item_3 = create(:item, name: 'Item 3')
