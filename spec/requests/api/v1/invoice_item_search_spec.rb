@@ -6,12 +6,12 @@ describe "Invoice_items API" do
     invoice = create(:invoice)
     @date = '2019-03-12 19:31:18 UTC'
     @assertion = '2019-03-12T19:31:18.000Z'
-    invoice_item = create(:invoice_item, quantity: 1, unit_price: 100, item_id: item.id, invoice_id: invoice.id, created_at: @date, updated_at: @date)
-    @id = invoice_item.id
-    @quantity = invoice_item.quantity
-    @unit_price = invoice_item.unit_price
-    @item_id = invoice_item.item_id
-    @invoice_id = invoice_item.invoice_id
+    @invoice_item = create(:invoice_item, quantity: 1, unit_price: 100, item_id: item.id, invoice_id: invoice.id, created_at: @date, updated_at: @date)
+    @id = @invoice_item.id
+    @quantity = @invoice_item.quantity
+    @unit_price = @invoice_item.unit_price.to_s.insert(-3, '.')
+    @item_id = @invoice_item.item_id
+    @invoice_id = @invoice_item.invoice_id
     create_list(:invoice_item, 5)
   end
   it "can search for an invoice_item with a query parameter" do

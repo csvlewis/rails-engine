@@ -9,7 +9,7 @@ describe "Items API" do
     @id = item.id
     @name = item.name
     @description = item.description
-    @unit_price = item.unit_price
+    @unit_price = item.unit_price.to_s.insert(-3, '.')
     @merchant_id = item.merchant_id
     create_list(:item, 5)
   end
@@ -83,7 +83,6 @@ describe "Items API" do
 
     get "/api/v1/items/find_all?unit_price=#{@unit_price}"
     items = JSON.parse(response.body)
-
     expect(response).to be_successful
     expect(items["data"].count).to eq(2)
     expect(items["data"].first["attributes"]["unit_price"]).to eq(@unit_price)

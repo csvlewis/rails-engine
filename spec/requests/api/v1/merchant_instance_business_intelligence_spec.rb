@@ -26,7 +26,7 @@ describe "Merchants API" do
     revenue = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(revenue["data"].first["attributes"]["revenue"]).to eq('15.00')
+    expect(revenue["data"]["attributes"]["revenue"]).to eq('15.00')
   end
 
   it 'can return the total revenue for a merchant across successful transactions on invoice date x' do
@@ -35,7 +35,7 @@ describe "Merchants API" do
     revenue = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(revenue["data"].first["attributes"]["revenue"]).to eq("5.00")
+    expect(revenue["data"]["attributes"]["revenue"]).to eq("5.00")
   end
 
   it 'can return the customer who has conducted the most successful transactions with this merchant' do
@@ -44,6 +44,6 @@ describe "Merchants API" do
     customer = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer["data"].first["id"]).to eq(@customer_2.id.to_s)
+    expect(customer["data"]["id"]).to eq(@customer_2.id.to_s)
   end
 end
