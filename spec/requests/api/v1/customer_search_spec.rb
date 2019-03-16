@@ -3,7 +3,6 @@ require 'rails_helper'
 describe "Customers API" do
   before :each do
     @date = '2019-03-12 19:31:18 UTC'
-    @assertion = '2019-03-12T19:31:18.000Z'
     customer = create(:customer, first_name: 'John', last_name: 'Doe', created_at: @date, updated_at: @date)
     @id = customer.id
     @first_name = customer.first_name
@@ -32,13 +31,13 @@ describe "Customers API" do
     customer = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer["data"]["attributes"]["created_at"]).to eq(@assertion)
+    expect(customer["data"]["id"]).to eq(@id.to_s)
 
     get "/api/v1/customers/find?updated_at=#{@date}"
     customer = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer["data"]["attributes"]["updated_at"]).to eq(@assertion)
+    expect(customer["data"]["id"]).to eq(@id.to_s)
   end
 
   it 'can search for all customers matching a query parameter' do
@@ -70,14 +69,14 @@ describe "Customers API" do
 
     expect(response).to be_successful
     expect(customer["data"].count).to eq(2)
-    expect(customer["data"].first["attributes"]["created_at"]).to eq(@assertion)
+    expect(customer["data"].first["id"]).to eq(@id.to_s)
 
     get "/api/v1/customers/find_all?updated_at=#{@date}"
     customer = JSON.parse(response.body)
 
     expect(response).to be_successful
     expect(customer["data"].count).to eq(2)
-    expect(customer["data"].first["attributes"]["updated_at"]).to eq(@assertion)
+    expect(customer["data"].first["id"]).to eq(@id.to_s)
   end
 
   it "can search for a random customer" do

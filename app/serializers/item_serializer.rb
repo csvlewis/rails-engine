@@ -1,6 +1,6 @@
 class ItemSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :name, :description, :merchant_id, :created_at, :updated_at
+  attributes :id, :name, :description, :merchant_id
   attribute :unit_price do |object|
     object.unit_price.to_s.insert(-3, '.')
   end

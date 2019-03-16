@@ -4,7 +4,6 @@ describe "Transactions API" do
   before :each do
     invoice = create(:invoice)
     @date = '2019-03-12 19:31:18 UTC'
-    @assertion = '2019-03-12T19:31:18.000Z'
     transaction = create(:transaction, credit_card_number: '1', credit_card_expiration_date: '1', result: 'result', invoice_id: invoice.id, created_at: @date, updated_at: @date)
     @id = transaction.id
     @credit_card_number = transaction.credit_card_number
@@ -30,7 +29,7 @@ describe "Transactions API" do
     transaction = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(transaction["data"]["attributes"]["credit_card_expiration_date"]).to eq(@credit_card_expiration_date)
+    expect(transaction["data"]["id"]).to eq(@id.to_s)
 
     get "/api/v1/transactions/find?result=#{@result}"
     transaction = JSON.parse(response.body)
@@ -48,13 +47,13 @@ describe "Transactions API" do
     transaction = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(transaction["data"]["attributes"]["created_at"]).to eq(@assertion)
+    expect(transaction["data"]["id"]).to eq(@id.to_s)
 
     get "/api/v1/transactions/find?updated_at=#{@date}"
     transaction = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(transaction["data"]["attributes"]["updated_at"]).to eq(@assertion)
+    expect(transaction["data"]["id"]).to eq(@id.to_s)
   end
 
   it "can search for all transactions matching a query parameter" do
@@ -79,7 +78,7 @@ describe "Transactions API" do
 
     expect(response).to be_successful
     expect(transactions["data"].count).to eq(2)
-    expect(transactions["data"].first["attributes"]["credit_card_expiration_date"]).to eq(@credit_card_expiration_date)
+    expect(transactions["data"].first["id"]).to eq(@id.to_s)
 
     get "/api/v1/transactions/find_all?result=#{@result}"
     transactions = JSON.parse(response.body)
@@ -100,14 +99,14 @@ describe "Transactions API" do
 
     expect(response).to be_successful
     expect(transactions["data"].count).to eq(2)
-    expect(transactions["data"].first["attributes"]["created_at"]).to eq(@assertion)
+    expect(transactions["data"].first["id"]).to eq(@id.to_s)
 
     get "/api/v1/transactions/find_all?updated_at=#{@date}"
     transactions = JSON.parse(response.body)
 
     expect(response).to be_successful
     expect(transactions["data"].count).to eq(2)
-    expect(transactions["data"].first["attributes"]["updated_at"]).to eq(@assertion)
+    expect(transactions["data"].first["id"]).to eq(@id.to_s)
   end
 
   it 'can return a random transaction' do

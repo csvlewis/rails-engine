@@ -53,6 +53,6 @@ describe "Merchants API" do
     revenue = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(revenue["data"]["attributes"]["revenue"]).to eq("20000.00")
+    expect(revenue["data"]["attributes"]["total_revenue"]).to eq("20000.00")
   end
 end

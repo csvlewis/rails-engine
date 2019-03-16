@@ -1,6 +1,6 @@
 class DateSerializer
   include FastJsonapi::ObjectSerializer
-  attribute :date do |object|
+  attribute :best_day do |object|
     object.best_day
   end
   attribute :amount_sold do |object|

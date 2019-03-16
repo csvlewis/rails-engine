@@ -4,7 +4,6 @@ describe "Items API" do
   before :each do
     merchant = create(:merchant)
     @date = '2019-03-12 19:31:18 UTC'
-    @assertion = '2019-03-12T19:31:18.000Z'
     item = create(:item, name: 'name', description: 'description', unit_price: 2000, merchant_id: merchant.id, created_at: @date, updated_at: @date)
     @id = item.id
     @name = item.name
@@ -48,13 +47,13 @@ describe "Items API" do
     item = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(item["data"]["attributes"]["created_at"]).to eq(@assertion)
+    expect(item["data"]["id"]).to eq(@id.to_s)
 
     get "/api/v1/items/find?updated_at=#{@date}"
     item = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(item["data"]["attributes"]["updated_at"]).to eq(@assertion)
+    expect(item["data"]["id"]).to eq(@id.to_s)
   end
 
   it "can search for all items matching a query parameter" do
@@ -99,14 +98,14 @@ describe "Items API" do
 
     expect(response).to be_successful
     expect(items["data"].count).to eq(2)
-    expect(items["data"].first["attributes"]["created_at"]).to eq(@assertion)
+    expect(items["data"].first["id"]).to eq(@id.to_s)
 
     get "/api/v1/items/find_all?updated_at=#{@date}"
     items = JSON.parse(response.body)
 
     expect(response).to be_successful
     expect(items["data"].count).to eq(2)
-    expect(items["data"].first["attributes"]["updated_at"]).to eq(@assertion)
+    expect(items["data"].first["id"]).to eq(@id.to_s)
   end
 
   it "can search for a random item" do

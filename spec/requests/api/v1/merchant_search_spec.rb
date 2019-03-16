@@ -3,7 +3,6 @@ require 'rails_helper'
 describe "Merchants API" do
   before :each do
     @date = '2019-03-12 19:31:18 UTC'
-    @assertion = '2019-03-12T19:31:18.000Z'
     merchant = create(:merchant, name: 'Searched Merchant', created_at: @date, updated_at: @date)
     @id = merchant.id
     @name = merchant.name
@@ -26,13 +25,13 @@ describe "Merchants API" do
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant["data"]["attributes"]["created_at"]).to eq(@assertion)
+    expect(merchant["data"]["id"]).to eq(@id.to_s)
 
     get "/api/v1/merchants/find?updated_at=#{@date}"
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant["data"]["attributes"]["updated_at"]).to eq(@assertion)
+    expect(merchant["data"]["id"]).to eq(@id.to_s)
   end
 
   it "can search for all merchants matching a query parameter" do
@@ -58,14 +57,14 @@ describe "Merchants API" do
 
     expect(response).to be_successful
     expect(merchant["data"].count).to eq(2)
-    expect(merchant["data"].first["attributes"]["created_at"]).to eq(@assertion)
+    expect(merchant["data"].first["id"]).to eq(@id.to_s)
 
     get "/api/v1/merchants/find_all?updated_at=#{@date}"
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
     expect(merchant["data"].count).to eq(2)
-    expect(merchant["data"].first["attributes"]["updated_at"]).to eq(@assertion)
+    expect(merchant["data"].first["id"]).to eq(@id.to_s)
   end
 
   it 'can return a random merchant' do

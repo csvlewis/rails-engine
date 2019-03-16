@@ -4,7 +4,7 @@ class Api::V1::Items::ItemsSearchController < ApplicationController
       params[:unit_price] = params[:unit_price].tr('.', '').to_i
       render json: ItemSerializer.new(Item.where(unit_price: params[:unit_price]))
     else
-      render json: ItemSerializer.new(Item.where(item_params))
+      render json: ItemSerializer.new(Item.where(item_params).order(:id))
     end
   end
 

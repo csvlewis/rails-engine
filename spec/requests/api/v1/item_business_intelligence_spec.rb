@@ -52,6 +52,6 @@ describe 'Items API' do
     date = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(date["data"][0]["attributes"]["date"]).to eq(@assertion)
+    expect(date["data"]["attributes"]["best_day"]).to eq(@assertion)
   end
 end

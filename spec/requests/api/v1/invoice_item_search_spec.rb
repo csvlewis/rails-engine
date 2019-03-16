@@ -5,7 +5,6 @@ describe "Invoice_items API" do
     item = create(:item)
     invoice = create(:invoice)
     @date = '2019-03-12 19:31:18 UTC'
-    @assertion = '2019-03-12T19:31:18.000Z'
     @invoice_item = create(:invoice_item, quantity: 1, unit_price: 100, item_id: item.id, invoice_id: invoice.id, created_at: @date, updated_at: @date)
     @id = @invoice_item.id
     @quantity = @invoice_item.quantity
@@ -49,13 +48,13 @@ describe "Invoice_items API" do
     invoice_item = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice_item["data"]["attributes"]["created_at"]).to eq(@assertion)
+    expect(invoice_item["data"]["id"]).to eq(@id.to_s)
 
     get "/api/v1/invoice_items/find?updated_at=#{@date}"
     invoice_item = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(invoice_item["data"]["attributes"]["updated_at"]).to eq(@assertion)
+    expect(invoice_item["data"]["id"]).to eq(@id.to_s)
   end
 
   it "can search for all invoice_items matching a query parameter" do
@@ -102,14 +101,14 @@ describe "Invoice_items API" do
 
     expect(response).to be_successful
     expect(invoice_item["data"].count).to eq(2)
-    expect(invoice_item["data"].first["attributes"]["created_at"]).to eq(@assertion)
+    expect(invoice_item["data"].first["id"]).to eq(@id.to_s)
 
     get "/api/v1/invoice_items/find_all?updated_at=#{@date}"
     invoice_item = JSON.parse(response.body)
 
     expect(response).to be_successful
     expect(invoice_item["data"].count).to eq(2)
-    expect(invoice_item["data"].first["attributes"]["updated_at"]).to eq(@assertion)
+    expect(invoice_item["data"].first["id"]).to eq(@id.to_s)
   end
 
   it 'can return a random invoice_item' do
