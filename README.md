@@ -35,7 +35,7 @@ Visit 'localhost:3000' in your internet browser
 
 You can then enter queries by adding them to the URL. For example, if you wanted to get a list of all of the invoices for merchant 1, you could enter 'localhost:3000/api/v1/merchants/1/invoices' and get the JSON representation of that data.
 
-All possible search queries can be found in the project description [here](http://backend.turing.io/module3/projects/rails_engine).
+All possible endpoints can be found in the project description [here](http://backend.turing.io/module3/projects/rails_engine).
 
 # Database Visualization
 
