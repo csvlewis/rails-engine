@@ -29,7 +29,7 @@ Run the 'import:csv' rake task to load CSV data
 
 Launch a local server with 'rails s'
 
-  rails s
+    rails s
 
 Visit 'localhost:3000' in your internet browser
 
