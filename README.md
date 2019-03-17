@@ -21,7 +21,7 @@ Create and migrate the database
 
     rake db:{create, migrate}
 
-Copy [SalesEngine CSV data](https://github.com/turingschool-examples/sales_engine/t`ree/master/data) into a folder name '/data' in the program's root directory
+Copy [SalesEngine CSV data](https://github.com/turingschool-examples/sales_engine/t`ree/master/data) into a folder named '/data' in the program's root directory
 
 Run the 'import:csv' rake task to load CSV data
 
