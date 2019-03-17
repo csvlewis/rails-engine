@@ -1,6 +1,6 @@
 # Rails Engine
 
-Rails engine is a JSON API capable of analyzing and returning data based off of [SalesEngine CSV data](https://github.com/turingschool-examples/sales_engine/tree/master/data). The API is compliant to the [JSON API spec](https://jsonapi.org/).
+Rails engine is a JSON API capable of analyzing and returning data based off of [SalesEngine CSV data](https://github.com/turingschool-examples/sales_engine/tree/master/data). It is compliant to the [JSON API spec](https://jsonapi.org/).
 
 # Prerequisites
 
