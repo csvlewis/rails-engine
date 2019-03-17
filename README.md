@@ -14,8 +14,8 @@ Clone the repo on your local machine from your terminal
 
 Enter the newly created directory and bundle
 
-  cd rails_engine
-  bundle
+    cd rails_engine
+    bundle
 
 Create and migrate the database
 
