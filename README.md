@@ -55,7 +55,7 @@ will run the customer_search_spec test that is found in that file on line 11.
 
 # Built With
 
-- Ruby on Rails Framework
+- [Ruby on Rails Framework](https://rubyonrails.org/)
 - [FastJsonapi](https://github.com/Netflix/fast_jsonapi)
 
 # Created By
