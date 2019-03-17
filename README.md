@@ -1,6 +1,6 @@
 # Rails Engine
 
-Rails engine is a JSON API capable of analyzing and returning data based off of [SalesEngine CSV data](https://github.com/turingschool-examples/sales_engine/tree/master/data). The API compliant to the [JSON API spec](https://jsonapi.org/).
+Rails engine is a JSON API capable of analyzing and returning data based off of [SalesEngine CSV data](https://github.com/turingschool-examples/sales_engine/tree/master/data). The API is compliant to the [JSON API spec](https://jsonapi.org/).
 
 # Prerequisites
 
@@ -14,14 +14,14 @@ Clone the repo on your local machine from your terminal
 
 Enter the newly created directory and bundle
 
-  cd rails_engine
-  bundle
+    cd rails_engine
+    bundle
 
 Create and migrate the database
 
     rake db:{create, migrate}
 
-Copy [SalesEngine CSV data](https://github.com/turingschool-examples/sales_engine/t`ree/master/data) into a folder name '/data' in the program's root directory
+Copy [SalesEngine CSV data](https://github.com/turingschool-examples/sales_engine/t`ree/master/data) into a folder named '/data' in the program's root directory
 
 Run the 'import:csv' rake task to load CSV data
 
@@ -29,7 +29,7 @@ Run the 'import:csv' rake task to load CSV data
 
 Launch a local server with 'rails s'
 
-  rails s
+    rails s
 
 Visit 'localhost:3000' in your internet browser
 
