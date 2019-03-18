@@ -19,7 +19,7 @@ Enter the newly created directory and bundle
 
 Create and migrate the database
 
-    rake db:{create, migrate}
+    rake db:{create,migrate}
 
 Copy [SalesEngine CSV data](https://github.com/turingschool-examples/sales_engine/t`ree/master/data) into a folder named '/data' in the program's root directory
 
